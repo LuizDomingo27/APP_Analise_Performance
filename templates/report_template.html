@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Relatório {{ nome_of }}</title>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0');
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Inter',sans-serif;background:#0f0f1a;color:#f0f0ff;}
+    @media print{
+      body{background:#fff!important;color:#111!important;}
+      .no-print{display:none!important;}
+      .page{box-shadow:none!important;margin:0!important;border-radius:0!important;}
+      .card{background:#f8f8ff!important;border-color:#ddd!important;}
+      .hdr-strip,.tbl th,.prob-fill,.ef-fill{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    }
+    .page{max-width:900px;margin:0 auto;background:#161628;
+          box-shadow:0 0 60px rgba(0,229,204,0.08);border-radius:16px;overflow:hidden;}
+    .hdr-strip{background:linear-gradient(135deg,#7c3aed 0%,#0d9488 100%);
+               padding:2.5rem;text-align:center;}
+    .hdr-strip h1{font-size:25px;font-weight:700;color:#fff;margin-bottom:5px;}
+    .hdr-sub{font-size:13px;color:rgba(255,255,255,.8);}
+    .hdr-badge{display:inline-block;margin-top:10px;background:rgba(255,255,255,.15);
+               border-radius:20px;padding:4px 20px;font-size:14px;color:#fff;font-weight:500;}
+    .hdr-meta{display:flex;margin-top:1.4rem;background:rgba(0,0,0,.18);
+              border-radius:10px;overflow:hidden;}
+    .hm-item{flex:1;padding:.75rem 1rem;text-align:center;
+             border-right:1px solid rgba(255,255,255,.1);}
+    .hm-item:last-child{border-right:none;}
+    .hm-lbl{font-size:10px;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.06em;}
+    .hm-val{color:#fff;font-size:14px;font-weight:600;margin-top:3px;}
+    .body{padding:2rem 2.5rem;}
+    .sec-t{font-size:11px;color:#00e5cc;text-transform:uppercase;letter-spacing:.08em;
+           font-weight:600;border-bottom:1px solid rgba(0,229,204,.2);
+           padding-bottom:5px;margin:1.5rem 0 1rem;}
+    .sec-pu{font-size:11px;color:#c084fc;text-transform:uppercase;letter-spacing:.08em;
+            font-weight:600;border-bottom:1px solid rgba(168,85,247,.2);
+            padding-bottom:5px;margin:1.5rem 0 1rem;}
+    .card{background:#1c1c35;border:1px solid rgba(0,229,204,.15);
+          border-radius:10px;padding:1rem 1.2rem;margin-bottom:.75rem;}
+    .mg{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin-bottom:.7rem;}
+    .mc{background:#1c1c35;border:1px solid rgba(0,229,204,.15);
+        border-radius:10px;padding:.85rem;text-align:center;}
+    .ml{font-size:10px;color:#94a3b8;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;}
+    .mv{font-size:19px;font-weight:600;}
+    .prob-track{background:#1a1a2e;border-radius:20px;height:13px;overflow:hidden;margin-top:8px;}
+    .prob-fill{height:100%;border-radius:20px;}
+    .prob-lbl{display:flex;justify-content:space-between;font-size:11px;color:#94a3b8;margin-top:3px;}
+    .status-badge{display:inline-flex;align-items:center;gap:5px;
+                  padding:5px 14px;border-radius:20px;font-size:13px;font-weight:600;}
+    .pill-ok{background:rgba(16,185,129,0.15);color:#10b981;border-radius:8px;padding:3px 11px;font-size:12px;font-weight:600;}
+    .pill-warn{background:rgba(245,158,11,0.15);color:#f59e0b;border-radius:8px;padding:3px 11px;font-size:12px;font-weight:600;}
+    .pill-bad{background:rgba(239,68,68,0.15);color:#ef4444;border-radius:8px;padding:3px 11px;font-size:12px;font-weight:600;}
+    table{width:100%;border-collapse:collapse;font-size:13px;}
+    th{background:#7c3aed;color:#fff;padding:8px 11px;text-align:center;
+       font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:.05em;}
+    td{padding:8px 11px;border-bottom:1px solid rgba(0,229,204,.09);text-align:center;}
+    tr:nth-child(even) td{background:#1a1a2e;}
+    .tr{text-align:center;}
+    .analise{background:rgba(16,185,129,.07);border:1px solid rgba(16,185,129,.2);
+             border-radius:10px;padding:1rem 1.2rem;font-size:13px;line-height:1.7;color:#cbd5e1;}
+    .rec{background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.25);
+         border-radius:10px;padding:1rem 1.2rem;font-size:13px;line-height:1.7;color:#cbd5e1;}
+    .print-btn{position:fixed;top:1.5rem;right:1.5rem;background:#065f46;
+               color:#fff;border:1px solid #059669;border-radius:10px;
+               padding:9px 18px;font-size:13px;font-weight:600;cursor:pointer;
+               font-family:'Inter',sans-serif;z-index:999;}
+    .footer{border-top:1px solid rgba(0,229,204,.12);padding:1rem 2.5rem;
+            font-size:11px;color:#475569;display:flex;justify-content:space-between;}
+    </style>
+</head>
+<body>
+    <button class='print-btn no-print' onclick='window.print()'>&#128438; Imprimir / PDF</button>
+    <div class='page'>
+        <div class='hdr-strip'>
+            <h1>&#128203; Relatório de Informações de Metas</h1>
+            <p class='hdr-sub'>Análise de capacidade produtiva e probabilidade de entrega</p>
+            <div class='hdr-badge'>&#127981; {{ nome_of }}</div>
+            <div class='hdr-meta'>
+                <div class='hm-item'><div class='hm-lbl'>Data</div><div class='hm-val'>{{ data_atual }}</div></div>
+                <div class='hm-item'><div class='hm-lbl'>Total Ordens</div><div class='hm-val'>{{ total_ordens }}</div></div>
+                <div class='hm-item'><div class='hm-lbl'>Total Peças</div><div class='hm-val'>{{ total_pecas }}</div></div>
+                <div class='hm-item'><div class='hm-lbl'>Prazo Médio</div><div class='hm-val'>{{ prazo_medio }} dias</div></div>
+                <div class='hm-item'><div class='hm-lbl'>Colaboradores</div><div class='hm-val'>{{ colaboradores }}</div></div>
+            </div>
+        </div>
+        <div class='body'>
+            <!-- PROBABILIDADE -->
+            <div class='sec-t'>&#127919; Probabilidade de Entrega</div>
+            <div class='card'>
+                <div style='display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;'>
+                    <div>
+                        <div style='font-size:50px;font-weight:700;color:{{ bcor }};line-height:1'>{{ prob }}%</div>
+                        <div style='font-size:13px;color:#94a3b8;margin-top:3px'>de probabilidade de entrega no prazo</div>
+                    </div>
+                    <span class='status-badge' style='background:{{ bbg }};color:{{ cor }}'>{{ icon }} {{ lbl }}</span>
+                </div>
+                <div class='prob-track'>
+                    <div class='prob-fill' style='width:{{ prob }}%;background:{{ bcor }}'></div>
+                </div>
+                <div class='prob-lbl'><span>0%</span><span>50%</span><span>100%</span></div>
+            </div>
+
+            <!-- INDICADORES DE PRODUÇÃO -->
+            <div class='sec-t'>&#128202; Indicadores de Produção</div>
+            <div class='mg'>
+                <div class='mc'><div class='ml'>Capacidade/dia</div><div class='mv' style='color:#00e5cc'>{{ cap_dia }} pc</div></div>
+                <div class='mc'><div class='ml'>Capacidade/semana</div><div class='mv' style='color:#2dd4bf'>{{ cap_semanal }} pc</div></div>
+                <div class='mc'><div class='ml'>Capacidade no prazo</div><div class='mv' style='color:#00e5cc'>{{ cap_no_prazo }} pc</div></div>
+                <div class='mc'><div class='ml'>Dias necessários</div><div class='mv' style='color:#2dd4bf'>{{ dias_necessarios }} d</div></div>
+                <div class='mc'><div class='ml'>Semanas necessárias</div><div class='mv' style='color:#c084fc'>{{ semanas_necessarias }} sem</div></div>
+                <div class='mc'><div class='ml'>Eficiência necessária</div><div class='mv' style='color:#a855f7'>{{ efic }}%</div></div>
+            </div>
+
+            <!-- BALANÇO -->
+            <div class='sec-t'>&#9878; Balanço de Capacidade</div>
+            <div class='card'>
+                <table>
+                    <tr><th>Item</th><th>Qtd (peças)</th><th>Situação</th></tr>
+                    <tr><td style='text-align:left'>Capacidade no prazo</td><td style='color:#00e5cc;font-weight:600'>{{ cap_no_prazo }}</td><td>—</td></tr>
+                    <tr><td style='text-align:left'>Total peças solicitadas</td><td style='color:#c084fc;font-weight:600'>{{ total_pecas }}</td><td>—</td></tr>
+                    <tr>
+                        <td style='text-align:left'><strong>Folga / Déficit</strong></td>
+                        <td style='color:{{ cor_fg }};font-weight:700'>{{ sinal }}{{ folga_abs }}</td>
+                        <td><span style='background:{{ folga_bg }};color:{{ folga_cor }};border-radius:7px;padding:2px 9px;font-size:11px'>{{ folga_lbl }}</span></td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- INDICADOR DE PERFORMANCE / EFICIÊNCIA -->
+            <div class='sec-pu'>&#128200; Indicador de Performance — Eficiência de Entrega</div>
+            <div class='card'>
+                <div style='display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;margin-bottom:1rem;'>
+                    <div>
+                        <div style='font-size:42px;font-weight:700;color:{{ ef_cor }};line-height:1'>{{ ef_pct }}%</div>
+                        <div style='font-size:12px;color:#94a3b8;margin-top:5px'>das ordens entregues com eficiência &#8805; 60%</div>
+                    </div>
+                    <span class='status-badge' style='background:{{ ef_bbg }};color:{{ ef_cor }}'>{{ ef_icon }} {{ ef_lbl }}</span>
+                </div>
+                <div class='prob-track'>
+                    <div class='prob-fill' style='width:{{ ef_pct }}%;background:{{ ef_cor }}'></div>
+                </div>
+                <div class='prob-lbl'>
+                    <span>0%</span>
+                    <span style='color:#f59e0b;font-weight:600'>&#9660; Meta 60%</span>
+                    <span>100%</span>
+                </div>
+            </div>
+            <div class='mg'>
+                <div class='mc'>
+                    <div class='ml'>Ordens na Meta (&#8805;60%)</div>
+                    <div class='mv' style='color:{{ ef_cor }}'>{{ ef_ordens_na_meta }} / {{ total_ordens }}</div>
+                </div>
+                <div class='mc'>
+                    <div class='ml'>Eficiência Média de Entrega</div>
+                    <div class='mv' style='color:#2dd4bf'>{{ ef_media }}%</div>
+                </div>
+                <div class='mc'>
+                    <div class='ml'>Classificação</div>
+                    <div class='mv' style='padding-top:4px'><span class='{{ ef_pill }}'>{{ ef_lbl }}</span></div>
+                </div>
+            </div>
+
+            <!-- ANÁLISE E RECOMENDAÇÃO -->
+            <div class='sec-t'>&#128270; Análise</div>
+            <div class='analise'>{{ analise }}</div>
+
+            <div class='sec-t' style='margin-top:1rem'>&#128161; Recomendação</div>
+            <div class='rec'>{{ rec }}</div>
+
+            <!-- PARÂMETROS -->
+            <div class='sec-t' style='margin-top:1.5rem'>&#9881; Parâmetros</div>
+            <div class='card'>
+                <table>
+                    <tr><th style='text-align:left'>Parâmetro</th><th>Valor</th></tr>
+                    <tr><td style='text-align:left'>Oficina</td><td><strong>{{ nome_of }}</strong></td></tr>
+                    <tr><td style='text-align:left'>Total de ordens</td><td>{{ total_ordens }}</td></tr>
+                    <tr><td style='text-align:left'>Total de peças</td><td>{{ total_pecas }}</td></tr>
+                    <tr><td style='text-align:left'>Total de minutos</td><td>{{ total_minutos }}</td></tr>
+                    <tr><td style='text-align:left'>Prazo médio (dias)</td><td>{{ prazo_medio }}</td></tr>
+                    <tr><td style='text-align:left'>Capacidade diária</td><td>{{ cap_dia }} pc</td></tr>
+                    <tr><td style='text-align:left'>Capacidade semanal</td><td>{{ cap_semanal }} pc</td></tr>
+                    <tr><td style='text-align:left'>Colaboradores</td><td>{{ colaboradores }}</td></tr>
+                    <tr><td style='text-align:left'>Razão capacidade/demanda</td><td>{{ ratio }}</td></tr>
+                </table>
+            </div>
+        </div>
+        <div class='footer'>
+            <span>Simulador de Metas - {{ data_atual }}</span>
+            <span>Documento confidencial - Uso interno</span>
+        </div>
+    </div>
+</body>
+</html>

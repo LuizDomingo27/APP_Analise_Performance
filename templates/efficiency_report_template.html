@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Relatório de Eficiência — {{ nome_of }}</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f0f1a;
+            color: #f0f0ff;
+        }
+
+        @media print {
+            body {
+                background: #fff !important;
+                color: #111 !important;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            .page {
+                box-shadow: none !important;
+                margin: 0 !important;
+                border-radius: 0 !important;
+            }
+
+            .card,
+            .risk-card {
+                background: #f8f8ff !important;
+                border-color: #ddd !important;
+            }
+
+            .hdr-strip,
+            .tbl-th,
+            .ef-fill,
+            .risk-icon {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+
+        .page {
+            max-width: 980px;
+            margin: 0 auto;
+            background: #161628;
+            box-shadow: 0 0 60px rgba(168, 85, 247, 0.12);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        /* ── CABEÇALHO ── */
+        .hdr-strip {
+            background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 50%, #0d9488 100%);
+            padding: 2.5rem;
+            text-align: center;
+        }
+
+        .hdr-strip h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .hdr-sub {
+            font-size: 13px;
+            color: rgba(255, 255, 255, .75);
+        }
+
+        .hdr-badge {
+            display: inline-block;
+            margin-top: 10px;
+            background: rgba(255, 255, 255, .15);
+            border-radius: 20px;
+            padding: 4px 20px;
+            font-size: 14px;
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .hdr-meta {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 1.4rem;
+            background: rgba(0, 0, 0, .18);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .hm-item {
+            flex: 1;
+            min-width: 90px;
+            padding: .75rem 1rem;
+            text-align: center;
+            border-right: 1px solid rgba(255, 255, 255, .1);
+        }
+
+        .hm-item:last-child {
+            border-right: none;
+        }
+
+        .hm-lbl {
+            font-size: 10px;
+            color: rgba(255, 255, 255, .6);
+            text-transform: uppercase;
+            letter-spacing: .06em;
+        }
+
+        .hm-val {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 3px;
+        }
+
+        .hm-alert {
+            color: #ef4444;
+            font-size: 14px;
+            font-weight: 700;
+            margin-top: 3px;
+        }
+
+        /* ── CORPO ── */
+        .body {
+            padding: 2rem 2.5rem;
+        }
+
+        .sec-t {
+            font-size: 11px;
+            color: #c084fc;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(168, 85, 247, .25);
+            padding-bottom: 5px;
+            margin: 1.5rem 0 1rem;
+        }
+
+        .card {
+            background: #1c1c35;
+            border: 1px solid rgba(168, 85, 247, .2);
+            border-radius: 10px;
+            padding: 1rem 1.2rem;
+            margin-bottom: .75rem;
+        }
+
+        /* ── KPIs GERAIS ── */
+        .mg {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: .7rem;
+            margin-bottom: .7rem;
+        }
+
+        .mc {
+            background: #1c1c35;
+            border: 1px solid rgba(168, 85, 247, .2);
+            border-radius: 10px;
+            padding: .85rem;
+            text-align: center;
+        }
+
+        .ml {
+            font-size: 10px;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            margin-bottom: 4px;
+        }
+
+        .mv {
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        /* ── BARRA DE PROGRESSO ── */
+        .prob-track {
+            background: #1a1a2e;
+            border-radius: 20px;
+            height: 16px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .ef-fill {
+            height: 100%;
+            border-radius: 20px;
+        }
+
+        .prob-lbl {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        /* ── CARTÕES DE RISCO POR PRAZO ── */
+        .risk-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: .9rem;
+            margin-bottom: .7rem;
+        }
+
+        .risk-card {
+            border-radius: 12px;
+            padding: 1.1rem 1.2rem;
+            text-align: center;
+            border: 1px solid;
+        }
+
+        .risk-card.danger {
+            background: rgba(239, 68, 68, .08);
+            border-color: rgba(239, 68, 68, .3);
+        }
+
+        .risk-card.warn {
+            background: rgba(245, 158, 11, .08);
+            border-color: rgba(245, 158, 11, .3);
+        }
+
+        .risk-card.ok {
+            background: rgba(16, 185, 129, .08);
+            border-color: rgba(16, 185, 129, .3);
+        }
+
+        .risk-icon {
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+
+        .risk-n {
+            font-size: 36px;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .risk-lbl {
+            font-size: 11px;
+            margin-top: 4px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: .05em;
+        }
+
+        .risk-sub {
+            font-size: 11px;
+            color: #94a3b8;
+            margin-top: 3px;
+        }
+
+        .danger .risk-n,
+        .danger .risk-lbl {
+            color: #ef4444;
+        }
+
+        .warn .risk-n,
+        .warn .risk-lbl {
+            color: #f59e0b;
+        }
+
+        .ok .risk-n,
+        .ok .risk-lbl {
+            color: #10b981;
+        }
+
+        /* ── PILLS ── */
+        .pill-ok {
+            background: rgba(16, 185, 129, .15);
+            color: #10b981;
+            border-radius: 8px;
+            padding: 3px 11px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .pill-warn {
+            background: rgba(245, 158, 11, .15);
+            color: #f59e0b;
+            border-radius: 8px;
+            padding: 3px 11px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .pill-bad {
+            background: rgba(239, 68, 68, .15);
+            color: #ef4444;
+            border-radius: 8px;
+            padding: 3px 11px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-urgente {
+            display: inline-block;
+            padding: 2px 9px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        /* ── TABELAS ── */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        th {
+            background: linear-gradient(90deg, #4c1d95, #7c3aed);
+            color: #fff;
+            padding: 8px 10px;
+            text-align: center;
+            font-weight: 500;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: .05em;
+        }
+
+        td {
+            padding: 8px 10px;
+            border-bottom: 1px solid rgba(168, 85, 247, .1);
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        tr:nth-child(even) td {
+            background: #1a1a2e;
+        }
+
+        tr:hover td {
+            background: rgba(168, 85, 247, .05);
+        }
+
+        td.nome {
+            text-align: left;
+            font-weight: 500;
+        }
+
+        /* ── BLOCO CRÍTICO ── */
+        .crit-wrap {
+            background: rgba(239, 68, 68, .05);
+            border: 1px solid rgba(239, 68, 68, .2);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: .7rem;
+        }
+
+        .crit-hdr {
+            background: rgba(239, 68, 68, .12);
+            padding: .6rem 1rem;
+            font-size: 12px;
+            font-weight: 700;
+            color: #ef4444;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* ── ANÁLISE / INSIGHT ── */
+        .meta-line {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: #94a3b8;
+            margin-top: 12px;
+        }
+
+        .meta-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #f59e0b;
+            display: inline-block;
+        }
+
+        .insight-ok {
+            background: rgba(16, 185, 129, .07);
+            border: 1px solid rgba(16, 185, 129, .2);
+            border-radius: 10px;
+            padding: 1rem 1.2rem;
+            font-size: 13px;
+            line-height: 1.7;
+            color: #cbd5e1;
+            margin-bottom: .6rem;
+        }
+
+        .insight-warn {
+            background: rgba(245, 158, 11, .07);
+            border: 1px solid rgba(245, 158, 11, .2);
+            border-radius: 10px;
+            padding: 1rem 1.2rem;
+            font-size: 13px;
+            line-height: 1.7;
+            color: #cbd5e1;
+            margin-bottom: .6rem;
+        }
+
+        .insight-bad {
+            background: rgba(239, 68, 68, .07);
+            border: 1px solid rgba(239, 68, 68, .2);
+            border-radius: 10px;
+            padding: 1rem 1.2rem;
+            font-size: 13px;
+            line-height: 1.7;
+            color: #cbd5e1;
+            margin-bottom: .6rem;
+        }
+
+        .rec-box {
+            background: #1c1c35;
+            border-left: 3px solid #7c3aed;
+            border-radius: 0 8px 8px 0;
+            padding: .75rem 1rem;
+            margin-top: .7rem;
+            font-size: 12px;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        /* ── RODAPÉ ── */
+        .print-btn {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: #4c1d95;
+            color: #fff;
+            border: 1px solid #7c3aed;
+            border-radius: 10px;
+            padding: 9px 18px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            z-index: 999;
+        }
+
+        .footer {
+            border-top: 1px solid rgba(168, 85, 247, .15);
+            padding: 1rem 2.5rem;
+            font-size: 11px;
+            color: #475569;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+
+<body>
+    <button class='print-btn no-print' onclick='window.print()'>&#128438; Imprimir / PDF</button>
+    <div class='page'>
+
+        <!-- ══ CABEÇALHO ══════════════════════════════════════════════════════ -->
+        <div class='hdr-strip'>
+            <h1>&#128200; Relatório de Eficiência de Entrega</h1>
+            <p class='hdr-sub'>Análise de performance baseada no cruzamento Acompanhamento × Recebimento</p>
+            <div class='hdr-badge'>&#127981; {{ nome_of }}</div>
+            <div class='hdr-meta'>
+                <div class='hm-item'>
+                    <div class='hm-lbl'>Data</div>
+                    <div class='hm-val'>{{ data_atual }}</div>
+                </div>
+                <div class='hm-item'>
+                    <div class='hm-lbl'>Total Ordens</div>
+                    <div class='hm-val'>{{ total_ordens }}</div>
+                </div>
+                <div class='hm-item'>
+                    <div class='hm-lbl'>Ordens na Meta</div>
+                    <div class='hm-val' style='color:{{ ef_cor }}'>{{ ef_ordens_na_meta }}</div>
+                </div>
+                <div class='hm-item'>
+                    <div class='hm-lbl'>% na Meta (≥60%)</div>
+                    <div class='hm-val' style='color:{{ ef_cor }}'>{{ ef_pct }}%</div>
+                </div>
+                <div class='hm-item'>
+                    <div class='hm-lbl'>Efic. Média</div>
+                    <div class='hm-val'>{{ ef_media }}%</div>
+                </div>
+                <div class='hm-item'>
+                    <div class='hm-lbl'>Saldo Pendente</div>
+                    <div class='hm-val' style='color:#00e5cc'>{{ pct_pendente }}%</div>
+                </div>
+                <div class='hm-item'>
+                    <div class='hm-lbl'>Ordens Vencidas</div>
+                    <div class='{{ hm_vencidas_cls }}'>{{ ordens_vencidas }}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class='body'>
+
+            <!-- ══ VISÃO GERAL DA PERFORMANCE ══════════════════════════════════ -->
+            <div class='sec-t'>&#127919; Visão Geral da Performance</div>
+            <div class='card'>
+                <div
+                    style='display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;margin-bottom:1.2rem;'>
+                    <div>
+                        <div style='font-size:56px;font-weight:700;color:{{ ef_cor }};line-height:1'>{{ ef_pct }}%</div>
+                        <div style='font-size:13px;color:#94a3b8;margin-top:6px'>das ordens entregues com eficiência ≥
+                            60%</div>
+                        <div class='meta-line'>
+                            <span class='meta-dot'></span>
+                            Meta de eficiência: <strong style='color:#f59e0b'>60%</strong> por ordem
+                        </div>
+                    </div>
+                    <span class='status-badge' style='background:{{ ef_bbg }};color:{{ ef_cor }};font-size:16px'>{{ ef_icon }} {{ ef_lbl }}</span>
+                </div>
+                <div class='prob-track'>
+                    <div class='ef-fill' style='width:{{ ef_pct }}%;background:{{ ef_cor }}'></div>
+                </div>
+                <div class='prob-lbl'>
+                    <span>0%</span>
+                    <span style='color:#f59e0b;font-weight:600'>&#9660; Meta 60%</span>
+                    <span>100%</span>
+                </div>
+            </div>
+
+            <!-- ══ KPIs ══════════════════════════════════════════════════════ -->
+            <div class='mg'>
+                <div class='mc'>
+                    <div class='ml'>Ordens na Meta (≥60%)</div>
+                    <div class='mv' style='color:{{ ef_cor }}'>{{ ef_ordens_na_meta }} / {{ total_ordens }}</div>
+                </div>
+                <div class='mc'>
+                    <div class='ml'>Eficiência Média de Entrega</div>
+                    <div class='mv' style='color:#2dd4bf'>{{ ef_media }}%</div>
+                </div>
+                <div class='mc'>
+                    <div class='ml'>Colaboradores</div>
+                    <div class='mv' style='color:#c084fc'>{{ colaboradores }}</div>
+                </div>
+            </div>
+
+            <!-- ══ DISTRIBUIÇÃO DE RISCO POR PRAZO ═══════════════════════════ -->
+            <div class='sec-t'>&#128680; Distribuição de Risco por Prazo</div>
+            <div class='risk-grid'>
+                <div class='risk-card danger'>
+                    <div class='risk-n'>{{ ordens_vencidas }}</div>
+                    <div class='risk-lbl'>Vencidas</div>
+                    <div class='risk-sub'>Prazo já expirou</div>
+                </div>
+                <div class='risk-card warn'>
+                    <div class='risk-n'>{{ ordens_urgentes }}</div>
+                    <div class='risk-lbl'>Urgentes</div>
+                    <div class='risk-sub'>Vencem em ≤ 7 dias</div>
+                </div>
+                <div class='risk-card ok'>
+                    <div class='risk-n'>{{ ordens_no_prazo }}</div>
+                    <div class='risk-lbl'>No Prazo</div>
+                    <div class='risk-sub'>Mais de 7 dias restantes</div>
+                </div>
+            </div>
+
+            <!-- ══ ORDENS CRÍTICAS (vencidas + urgentes) ══════════════════════ -->
+            {{ bloco_criticas }}
+
+            <!-- ══ DETALHE COMPLETO DAS ORDENS ═══════════════════════════════ -->
+            <div class='sec-t'>&#128203; Detalhamento por Ordem</div>
+            <div class='card' style='padding:0;overflow:hidden;'>
+                <table>
+                    <tr>
+                        <th style='text-align:left'>Ordem Mestre</th>
+                        <th>Envio</th>
+                        <th>Dead Line</th>
+                        <th>Falta p/ Vencer</th>
+                        <th>Qtd Solicitada</th>
+                        <th>Qtd Entregue</th>
+                        <th>Qtd Pendente</th>
+                        <th>% Entregue</th>
+                        <th>Minutos</th>
+                        <th>Prazo (dias)</th>
+                    </tr>
+                    {{ linhas_ordens }}
+                </table>
+            </div>
+
+            <!-- ══ ANÁLISE DE EFICIÊNCIA ══════════════════════════════════════ -->
+            <div class='sec-t'>&#128270; Análise de Eficiência</div>
+            <div class='{{ insight_cls }}'>{{ insight_txt }}</div>
+            <div class='rec-box'>{{ rec_txt }}</div>
+
+        </div>
+        <div class='footer'>
+            <span>Análise de Performance — Relatório de Eficiência — {{ data_atual }}</span>
+            <span>Documento confidencial - Uso interno</span>
+        </div>
+    </div>
+</body>
+
+</html>

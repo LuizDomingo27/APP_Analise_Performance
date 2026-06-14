@@ -1,0 +1,303 @@
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0');
+
+html, body, [class*="css"] {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 15px;
+}
+
+.stApp {
+    background: #0f0f1a;
+    color: #f0f0ff;
+}
+
+.block-container {
+    padding-top: 1.5rem;
+    padding-bottom: 3rem;
+}
+
+h1, h2, h3 {
+    color: #f0f0ff !important;
+    font-weight: 500 !important;
+}
+
+.card {
+    background: #161628;
+    border: 1px solid rgba(0, 229, 204, 0.18);
+    border-radius: 12px;
+    padding: .9rem 1.1rem;
+    margin-bottom: .6rem;
+}
+
+.card-pu {
+    background: #161628;
+    border: 1px solid rgba(168, 85, 247, 0.28);
+    border-radius: 12px;
+    padding: .9rem 1.1rem;
+    margin-bottom: .6rem;
+}
+
+.kpi-wrap {
+    background: #1c1c35;
+    border: 1px solid rgba(0, 229, 204, 0.18);
+    border-radius: 11px;
+    padding: .8rem 1rem;
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+.kpi-lbl {
+    font-size: 12px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin-bottom: 3px;
+}
+
+.kpi-val {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.badge-ok {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+    border-radius: 20px;
+    padding: 4px 13px;
+    font-size: 14px;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.badge-warn {
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+    border-radius: 20px;
+    padding: 4px 13px;
+    font-size: 14px;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.badge-bad {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+    border-radius: 20px;
+    padding: 4px 13px;
+    font-size: 14px;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.alert-ok {
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    border-radius: 10px;
+    padding: 9px 13px;
+    font-size: 15px;
+    color: #94a3b8;
+    line-height: 1.6;
+}
+
+.alert-warn {
+    background: rgba(245, 158, 11, 0.08);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+    border-radius: 10px;
+    padding: 9px 13px;
+    font-size: 15px;
+    color: #94a3b8;
+    line-height: 1.6;
+}
+
+.alert-bad {
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    border-radius: 10px;
+    padding: 9px 13px;
+    font-size: 15px;
+    color: #94a3b8;
+    line-height: 1.6;
+}
+
+.stSelectbox>div>div, .stNumberInput>div>div>input {
+    background: #1a1a2e !important;
+    border: 1px solid rgba(0, 229, 204, 0.18) !important;
+    color: #f0f0ff !important;
+    border-radius: 8px !important;
+}
+
+.stSlider>div>div>div {
+    background: #00e5cc !important;
+}
+
+.stButton>button {
+    background: #7c3aed !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 10px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    width: 100% !important;
+    transition: opacity .2s !important;
+}
+
+.stButton>button:hover {
+    opacity: .85 !important;
+}
+
+[data-testid="stDownloadButton"] button {
+    background: #065f46 !important;
+    color: #fff !important;
+    border: 1px solid #059669 !important;
+    border-radius: 10px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    width: 100% !important;
+}
+
+[data-testid="stDownloadButton"] button:hover {
+    opacity: .85 !important;
+}
+
+.stFileUploader>div {
+    background: #161628 !important;
+    border: 1.5px dashed rgba(0, 229, 204, 0.28) !important;
+    border-radius: 12px !important;
+}
+
+.tbl {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+}
+
+.tbl th {
+    background: #7c3aed;
+    color: #fff;
+    padding: 9px 11px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+}
+
+.tbl td {
+    padding: 8px 11px;
+    color: #f0f0ff;
+    border-bottom: 1px solid rgba(0, 229, 204, 0.09);
+}
+
+.tbl tr:nth-child(even) td {
+    background: #1c1c35;
+}
+
+.tbl tr:nth-child(odd) td {
+    background: #161628;
+}
+
+.tbl tr:hover td {
+    background: rgba(0, 229, 204, 0.06);
+}
+
+.tr {
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+}
+
+.pill-ok {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+    border-radius: 8px;
+    padding: 2px 9px;
+    font-size: 12px;
+}
+
+.pill-warn {
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+    border-radius: 8px;
+    padding: 2px 9px;
+    font-size: 12px;
+}
+
+.pill-bad {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+    border-radius: 8px;
+    padding: 2px 9px;
+    font-size: 12px;
+}
+
+hr {
+    border-color: rgba(0, 229, 204, 0.18) !important;
+    margin: 1.2rem 0 !important;
+}
+
+.sec {
+    font-size: 13px;
+    color: #00e5cc;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    border-bottom: 1px solid rgba(0, 229, 204, 0.18);
+    padding-bottom: 5px;
+    margin: 1.2rem 0 .75rem;
+}
+
+.sec-pu {
+    font-size: 13px;
+    color: #c084fc;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+    padding-bottom: 5px;
+    margin: 1.2rem 0 .75rem;
+}
+
+label[data-testid="stWidgetLabel"] p {
+    color: #00e5cc !important;
+    font-size: 13px !important;
+    text-transform: uppercase !important;
+    letter-spacing: .06em !important;
+    font-weight: 500 !important;
+}
+
+.dias-counter {
+    background: #1a1a2e;
+    border: 1px solid rgba(0, 229, 204, 0.18);
+    border-radius: 8px;
+    padding: 7px 0;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+    color: #f0f0ff;
+}
+
+.of-info {
+    font-size: 13px;
+    color: #94a3b8;
+    margin-top: 4px;
+}
+
+.of-info span {
+    background: rgba(0, 229, 204, 0.08);
+    color: #00e5cc;
+    border-radius: 6px;
+    padding: 2px 8px;
+    margin-right: 3px;
+}
+
+.chip {
+    background: rgba(0, 229, 204, 0.1);
+    color: #00e5cc;
+    border-radius: 8px;
+    padding: 3px 11px;
+    font-size: 13px;
+    display: inline-block;
+    margin-bottom: .6rem;
+}
+
+#MainMenu, footer {
+    visibility: hidden;
+}
