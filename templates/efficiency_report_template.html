@@ -16,8 +16,8 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: #0f0f1a;
-            color: #f0f0ff;
+            background: #FFFFFF;
+            color: #1F2937;
         }
 
         @media print {
@@ -38,7 +38,7 @@
 
             .card,
             .risk-card {
-                background: #f8f8ff !important;
+                background: #FFFFFF !important;
                 border-color: #ddd !important;
             }
 
@@ -54,7 +54,7 @@
         .page {
             max-width: 980px;
             margin: 0 auto;
-            background: #161628;
+            background: #FFFFFF;
             box-shadow: 0 0 60px rgba(168, 85, 247, 0.12);
             border-radius: 16px;
             overflow: hidden;
@@ -62,7 +62,7 @@
 
         /* ── CABEÇALHO ── */
         .hdr-strip {
-            background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 50%, #0d9488 100%);
+            background: linear-gradient(135deg, #4c1d95 0%, #00B8A3 50%, #0d9488 100%);
             padding: 2.5rem;
             text-align: center;
         }
@@ -139,7 +139,7 @@
 
         .sec-t {
             font-size: 11px;
-            color: #c084fc;
+            color: #00B8A3;
             text-transform: uppercase;
             letter-spacing: .08em;
             font-weight: 600;
@@ -149,7 +149,7 @@
         }
 
         .card {
-            background: #1c1c35;
+            background: #F4FBFA;
             border: 1px solid rgba(168, 85, 247, .2);
             border-radius: 10px;
             padding: 1rem 1.2rem;
@@ -165,7 +165,7 @@
         }
 
         .mc {
-            background: #1c1c35;
+            background: #F4FBFA;
             border: 1px solid rgba(168, 85, 247, .2);
             border-radius: 10px;
             padding: .85rem;
@@ -174,7 +174,7 @@
 
         .ml {
             font-size: 10px;
-            color: #94a3b8;
+            color: #5B6B7B;
             text-transform: uppercase;
             letter-spacing: .06em;
             margin-bottom: 4px;
@@ -187,7 +187,7 @@
 
         /* ── BARRA DE PROGRESSO ── */
         .prob-track {
-            background: #1a1a2e;
+            background: #EBFBF8;
             border-radius: 20px;
             height: 16px;
             overflow: hidden;
@@ -203,7 +203,7 @@
             display: flex;
             justify-content: space-between;
             font-size: 11px;
-            color: #94a3b8;
+            color: #5B6B7B;
             margin-top: 4px;
         }
 
@@ -268,7 +268,7 @@
 
         .risk-sub {
             font-size: 11px;
-            color: #94a3b8;
+            color: #5B6B7B;
             margin-top: 3px;
         }
 
@@ -331,7 +331,7 @@
         }
 
         th {
-            background: linear-gradient(90deg, #4c1d95, #7c3aed);
+            background: linear-gradient(90deg, #4c1d95, #00B8A3);
             color: #fff;
             padding: 8px 10px;
             text-align: center;
@@ -349,7 +349,7 @@
         }
 
         tr:nth-child(even) td {
-            background: #1a1a2e;
+            background: #EBFBF8;
         }
 
         tr:hover td {
@@ -387,7 +387,7 @@
             align-items: center;
             gap: 8px;
             font-size: 12px;
-            color: #94a3b8;
+            color: #5B6B7B;
             margin-top: 12px;
         }
 
@@ -406,7 +406,7 @@
             padding: 1rem 1.2rem;
             font-size: 13px;
             line-height: 1.7;
-            color: #cbd5e1;
+            color: #374151;
             margin-bottom: .6rem;
         }
 
@@ -417,7 +417,7 @@
             padding: 1rem 1.2rem;
             font-size: 13px;
             line-height: 1.7;
-            color: #cbd5e1;
+            color: #374151;
             margin-bottom: .6rem;
         }
 
@@ -428,18 +428,18 @@
             padding: 1rem 1.2rem;
             font-size: 13px;
             line-height: 1.7;
-            color: #cbd5e1;
+            color: #374151;
             margin-bottom: .6rem;
         }
 
         .rec-box {
-            background: #1c1c35;
-            border-left: 3px solid #7c3aed;
+            background: #F4FBFA;
+            border-left: 3px solid #00B8A3;
             border-radius: 0 8px 8px 0;
             padding: .75rem 1rem;
             margin-top: .7rem;
             font-size: 12px;
-            color: #94a3b8;
+            color: #5B6B7B;
             line-height: 1.6;
         }
 
@@ -450,7 +450,7 @@
             right: 1.5rem;
             background: #4c1d95;
             color: #fff;
-            border: 1px solid #7c3aed;
+            border: 1px solid #00B8A3;
             border-radius: 10px;
             padding: 9px 18px;
             font-size: 13px;
@@ -464,7 +464,7 @@
             border-top: 1px solid rgba(168, 85, 247, .15);
             padding: 1rem 2.5rem;
             font-size: 11px;
-            color: #475569;
+            color: #5B6B7B;
             display: flex;
             justify-content: space-between;
         }
@@ -503,7 +503,7 @@
                 </div>
                 <div class='hm-item'>
                     <div class='hm-lbl'>Saldo Pendente</div>
-                    <div class='hm-val' style='color:#00e5cc'>{{ pct_pendente }}%</div>
+                    <div class='hm-val' style='color:#00B8A3'>{{ pct_pendente }}%</div>
                 </div>
                 <div class='hm-item'>
                     <div class='hm-lbl'>Ordens Vencidas</div>
@@ -521,7 +521,7 @@
                     style='display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;margin-bottom:1.2rem;'>
                     <div>
                         <div style='font-size:56px;font-weight:700;color:{{ ef_cor }};line-height:1'>{{ ef_pct }}%</div>
-                        <div style='font-size:13px;color:#94a3b8;margin-top:6px'>das ordens entregues com eficiência ≥
+                        <div style='font-size:13px;color:#5B6B7B;margin-top:6px'>das ordens entregues com eficiência ≥
                             60%</div>
                         <div class='meta-line'>
                             <span class='meta-dot'></span>
@@ -552,7 +552,7 @@
                 </div>
                 <div class='mc'>
                     <div class='ml'>Colaboradores</div>
-                    <div class='mv' style='color:#c084fc'>{{ colaboradores }}</div>
+                    <div class='mv' style='color:#00B8A3'>{{ colaboradores }}</div>
                 </div>
             </div>
 

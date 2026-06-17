@@ -113,8 +113,8 @@ def exportar_xlsx_executivo(df_base, df_detalhe, df_eficiencia):
         font_header = Font(name="Segoe UI", size=11, bold=True, color="FFFFFF")
         font_data = Font(name="Segoe UI", size=11, bold=False, color="333333")
         
-        fill_header = PatternFill(start_color="1F4E78", end_color="1F4E78", fill_type="solid") # Navy azul executivo
-        fill_zebra = PatternFill(start_color="F2F4F7", end_color="F2F4F7", fill_type="solid") # Zebra striping
+        fill_header = PatternFill(start_color="00B8A3", end_color="00B8A3", fill_type="solid") # Navy azul executivo
+        fill_zebra = PatternFill(start_color="EBFBF8", end_color="EBFBF8", fill_type="solid") # Zebra striping
         fill_white = PatternFill(start_color="FFFFFF", end_color="FFFFFF", fill_type="solid")
         
         # Cores para alertas (soft)
@@ -131,7 +131,7 @@ def exportar_xlsx_executivo(df_base, df_detalhe, df_eficiencia):
         font_danger = Font(name="Segoe UI", size=11, bold=True, color="C65911")
         
         # Bordas
-        thin_side = Side(style="thin", color="D9D9D9")
+        thin_side = Side(style="thin", color="CFE9E4")
         border_all = Border(left=thin_side, right=thin_side, top=thin_side, bottom=thin_side)
         
         # Formatos de número excel
@@ -271,11 +271,11 @@ def exportar_recebimento_xlsx_executivo(df_rec_of, c_om, c_qtd, c_min, c_dia):
         font_header = Font(name="Segoe UI", size=11, bold=True, color="FFFFFF")
         font_data = Font(name="Segoe UI", size=11, bold=False, color="333333")
         
-        fill_header = PatternFill(start_color="1F4E78", end_color="1F4E78", fill_type="solid")
-        fill_zebra = PatternFill(start_color="F2F4F7", end_color="F2F4F7", fill_type="solid")
+        fill_header = PatternFill(start_color="00B8A3", end_color="00B8A3", fill_type="solid")
+        fill_zebra = PatternFill(start_color="EBFBF8", end_color="EBFBF8", fill_type="solid")
         fill_white = PatternFill(start_color="FFFFFF", end_color="FFFFFF", fill_type="solid")
         
-        thin_side = Side(style="thin", color="D9D9D9")
+        thin_side = Side(style="thin", color="CFE9E4")
         border_all = Border(left=thin_side, right=thin_side, top=thin_side, bottom=thin_side)
         
         fmt_int = "#,##0"
